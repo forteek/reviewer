@@ -77,5 +77,9 @@
             "allow-contrib": false,
             "require": "6.0.*"
         }
+    },
+    "require-dev": {
+        "nelmio/alice": "^3.10",
+        "symfony/finder": "6.0.*"
     }
 }

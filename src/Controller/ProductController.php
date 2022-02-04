@@ -48,7 +48,7 @@ class ProductController extends AbstractController
 
     #[Rest\Post(path: '/products', name: 'create_title')]
     #[Param\Instance]
-    public function create(
+    public function store(
         Instantiator $instantiator,
         ParamFetcherInterface $paramFetcher,
         EntityManagerInterface $manager

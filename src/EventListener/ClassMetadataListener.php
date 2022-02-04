@@ -12,7 +12,6 @@ class ClassMetadataListener
 
         if ($classMetadata->namespace === 'League\Bundle\OAuth2ServerBundle\Model') {
             $originalTableName = $classMetadata->getTableName();
-            dump($originalTableName);
             $tableName = 'oauth.' . substr($originalTableName, 7);
 
             $classMetadata->setPrimaryTable(['name' => $tableName]);

@@ -20,7 +20,7 @@ class Product
         ProductGroups::INDEX,
         ProductGroups::SHOW,
     ])]
-    private ?int $id;
+    public ?int $id;
 
     #[ORM\Column(type: Types::STRING, length:255)]
     #[Constraints\Type(type: Types::STRING)]

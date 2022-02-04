@@ -6,7 +6,7 @@ league_oauth2_server:
     private_key_passphrase: null
     encryption_key: '%env(OAUTH_ENCRYPTION_KEY)%'
     encryption_key_type:  plain
-    access_token_ttl:     PT1D
+    access_token_ttl:     PT12H
     refresh_token_ttl:    P1M
     auth_code_ttl:        PT10M
     enable_client_credentials_grant: true
