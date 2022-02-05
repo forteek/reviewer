@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Enum\BaseGroups;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
@@ -40,40 +41,10 @@ abstract class AbstractController extends AbstractFOSRestController
         return $this->handleView($view);
     }
 
-    protected function list(
-        array $collection,
-        int $totalCount,
-        int $limit,
-        $groups = [],
-        int $statusCode = Response::HTTP_OK
-    ): Response {
-        if (0 === $limit) {
-            $pageCount = 1;
-        } else {
-            $pageCount = ceil($totalCount / $limit);
-        }
-
-        $view = $this->view(
-            [
-                'totalCount' => $totalCount,
-                'pageCount' => $pageCount,
-                'items' => $collection,
-            ],
-            $statusCode
-        );
-
-        if (gettype($groups) === 'string') {
-            $groups = [$groups];
-        }
-        $this->buildContext($view, $groups);
-
-        return $this->handleView($view);
-    }
-
     protected function buildContext(View $view, array $groups): void
     {
         $view->getContext()
-            ->setGroups([...$groups, 'base'])
+            ->setGroups([BaseGroups::DEFAULT, ...$groups])
             ->setSerializeNull(true)
         ;
     }

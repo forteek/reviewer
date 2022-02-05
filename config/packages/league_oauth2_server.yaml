@@ -9,11 +9,11 @@ league_oauth2_server:
     access_token_ttl:     PT12H
     refresh_token_ttl:    P1M
     auth_code_ttl:        PT10M
-    enable_client_credentials_grant: true
+    enable_client_credentials_grant: false
     enable_password_grant: true
     enable_refresh_token_grant: true
-    enable_auth_code_grant: true
-    require_code_challenge_for_public_clients: true
+    enable_auth_code_grant: false
+    require_code_challenge_for_public_clients: false
     persist_access_token: true
 
   resource_server:

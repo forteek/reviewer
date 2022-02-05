@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Enum\SerializationGroup\SerializationGroup;
 use App\Exception\UnprocessableEntityHttpException;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;

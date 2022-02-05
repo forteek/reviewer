@@ -20,6 +20,7 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Tests/'
+            - '../src/Repository/EntityRepository.php'
 
     Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter: '@serializer.name_converter.camel_case_to_snake_case'
 
@@ -31,6 +32,17 @@ services:
         tags:
             - { name: doctrine.event_listener, event: loadClassMetadata, priority: 64 }
 
+    doctrine.dbal.schema:
+        class: 'Doctrine\DBAL\Schema\PostgreSQLSchemaManager'
+
     App\Command\LoadFixtures:
         arguments:
             $fixturesDirectory: '%kernel.project_dir%/fixtures'
+
+    App\Infrastructure\Doctrine\DBAL\Schema\PostgreSQLSchemaManager:
+        decorates: doctrine.dbal.schema
+        arguments:
+            - '@.inner'
+
+    App\Repository\SecurityUserRepository: ~
+    League\OAuth2\Server\Repositories\UserRepositoryInterface: '@App\Repository\SecurityUserRepository'
