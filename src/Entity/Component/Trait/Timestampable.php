@@ -2,7 +2,7 @@
 
 namespace App\Entity\Component\Trait;
 
-use App\Enum\BaseGroups;
+use App\Enum\SerializationGroup\BaseGroups;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,7 +16,7 @@ trait Timestampable
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     #[Groups([BaseGroups::TIMESTAMPS])]
-    private readonly DateTimeImmutable $modifiedAt;
+    private DateTimeImmutable $modifiedAt;
 
     #[ORM\PrePersist]
     public function created(): void

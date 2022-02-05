@@ -4,7 +4,7 @@ namespace App\Entity\User;
 
 use App\Entity\AbstractEntity;
 use App\Entity\Game\Game;
-use App\Enum\UserGroups;
+use App\Enum\SerializationGroup\User\UserGroups;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -12,13 +12,14 @@ use Doctrine\ORM\Mapping as ORM;
 use League\OAuth2\Server\Entities\UserEntityInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints;
 
 #[ORM\Entity]
-#[ORM\Table(schema: 'user')]
+#[ORM\Table]
 #[UniqueEntity(fields: 'email')]
-class User extends AbstractEntity implements PasswordAuthenticatedUserInterface, UserEntityInterface
+class User extends AbstractEntity implements PasswordAuthenticatedUserInterface, UserEntityInterface, UserInterface
 {
     #[ORM\Column(type: Types::STRING, length: 255, unique: true)]
     #[Constraints\Type(type: Types::STRING)]
@@ -28,6 +29,8 @@ class User extends AbstractEntity implements PasswordAuthenticatedUserInterface,
     #[Groups([
         UserGroups::CREATE,
         UserGroups::SHOW,
+        UserGroups::INDEX,
+        UserGroups::UPDATE,
     ])]
     private string $email;
 
@@ -37,6 +40,7 @@ class User extends AbstractEntity implements PasswordAuthenticatedUserInterface,
     #[Constraints\NotBlank(allowNull: false, groups: [UserGroups::CREATE])]
     #[Groups([
         UserGroups::CREATE,
+        UserGroups::UPDATE,
     ])]
     private string $password;
 
@@ -72,7 +76,7 @@ class User extends AbstractEntity implements PasswordAuthenticatedUserInterface,
         return $this;
     }
 
-    public function getIdentifier()
+    public function getIdentifier(): string
     {
         return $this->email;
     }
@@ -87,5 +91,19 @@ class User extends AbstractEntity implements PasswordAuthenticatedUserInterface,
         $this->ownedGames = $games;
 
         return $this;
+    }
+
+    public function getRoles(): array
+    {
+        return [];
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->getIdentifier();
     }
 }

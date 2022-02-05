@@ -2,21 +2,22 @@
 
 namespace App\Component\Model;
 
+use App\Enum\SerializationGroup\BaseGroups;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 class PaginatedList
 {
-    #[Groups(['base'])]
-    private int $totalCount;
+    #[Groups([BaseGroups::DEFAULT])]
+    protected int $totalCount;
 
-    #[Groups(['base'])]
-    private int $page;
+    #[Groups([BaseGroups::DEFAULT])]
+    protected int $page;
 
-    #[Groups(['base'])]
-    private int $pageCount;
+    #[Groups([BaseGroups::DEFAULT])]
+    protected int $pageCount;
 
-    #[Groups(['base'])]
-    private array $items;
+    #[Groups([BaseGroups::DEFAULT])]
+    protected array $items;
 
     public function __construct(int $totalCount, int $page, int $pageCount, array $items)
     {

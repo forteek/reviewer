@@ -7,7 +7,7 @@ doctrine:
         #server_version: '13'
     orm:
         auto_generate_proxy_classes: true
-        naming_strategy: App\Infrastructure\Doctrine\NamingStrategy\UnderscoreNamingStrategy
+        naming_strategy: App\Bridge\Doctrine\NamingStrategy\UnderscoreNamingStrategy
         auto_mapping: true
         mappings:
             App:

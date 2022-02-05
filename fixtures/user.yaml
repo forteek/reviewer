@@ -1,0 +1,16 @@
+App\Entity\User\User:
+  monika:
+    email: 'monika@gmail.com'
+    password: '\$2y\$13\$hURxRm.99HmUBhSVjIVHL.ZAVuhprFaW9bHhgIKgbOdYLVG6k66lu' # haslo
+
+  piotrek:
+    email: 'piotrek@gmail.com'
+    password: '\$2y\$13\$apFhVe9En54EFlNYvl98NefvqAct489eyibwZz9jK3yBzPzN.1LS6'
+
+  marcin:
+    email: 'marcin@gmail.com'
+    password: '\$2y\$13\$7No35Rw/.zNfIzdrXzTvRetNTFVERx/cDwp6KBnYviuRk8KHly13G'
+
+  developer:
+    email: 'developer@gmail.com'
+    password: '\$2y\$13\$ECTrpbhjAvikvDhKc44lc.ZKspApwvNXGw45sb4v/XEQopLDdqBZa'

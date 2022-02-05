@@ -32,17 +32,23 @@ services:
         tags:
             - { name: doctrine.event_listener, event: loadClassMetadata, priority: 64 }
 
-    doctrine.dbal.schema:
-        class: 'Doctrine\DBAL\Schema\PostgreSQLSchemaManager'
+    App\EventListener\KernelRequestListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, priority: 4 }
 
     App\Command\LoadFixtures:
         arguments:
             $fixturesDirectory: '%kernel.project_dir%/fixtures'
 
-    App\Infrastructure\Doctrine\DBAL\Schema\PostgreSQLSchemaManager:
-        decorates: doctrine.dbal.schema
+    App\Repository\RepositoryFactory:
         arguments:
-            - '@.inner'
+            $container: '@service_container'
 
     App\Repository\SecurityUserRepository: ~
     League\OAuth2\Server\Repositories\UserRepositoryInterface: '@App\Repository\SecurityUserRepository'
+
+    League\Bundle\OAuth2ServerBundle\Security\Authenticator\OAuth2Authenticator:
+        arguments:
+            $httpMessageFactory: '@league.oauth2_server.factory.psr_http'
+            $userProvider: '@security.user.provider.concrete.app_user_provider'
+            $rolePrefix: 'ROLE_OAUTH2_'

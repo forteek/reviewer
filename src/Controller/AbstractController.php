@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
-use App\Enum\BaseGroups;
+use App\Entity\User\User;
+use App\Enum\SerializationGroup\BaseGroups;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Response;
-use FOS\RestBundle\Controller\AbstractFOSRestController;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class AbstractController extends AbstractFOSRestController
 {
@@ -47,5 +49,13 @@ abstract class AbstractController extends AbstractFOSRestController
             ->setGroups([BaseGroups::DEFAULT, ...$groups])
             ->setSerializeNull(true)
         ;
+    }
+
+    protected function getUser(): ?User
+    {
+        /** @var ?User $user */
+        $user = parent::getUser();
+
+        return $user;
     }
 }

@@ -12,14 +12,10 @@ use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 
 class Instantiator
 {
-    private SerializerInterface $serializer;
-    private ValidatorInterface $validator;
-
-    public function __construct(SerializerInterface $serializer, ValidatorInterface $validator)
-    {
-        $this->serializer = $serializer;
-        $this->validator = $validator;
-    }
+    public function __construct(
+        protected SerializerInterface $serializer,
+        protected ValidatorInterface $validator
+    ) {}
 
     public function deserialize(
         string $data,

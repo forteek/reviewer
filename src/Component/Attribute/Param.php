@@ -9,28 +9,14 @@ use FOS\RestBundle\Controller\Annotations\ParamInterface;
 
 abstract class Param implements ParamInterface
 {
-    protected string $name;
-    protected string $in;
-    protected string $description;
-    protected bool $allowEmptyValue;
-    protected bool $required;
-    protected $default;
-
     public function __construct(
-        string $name,
-        string $in,
-        string $description,
-        bool $allowEmptyValue,
-        bool $required,
-               $default
-    ) {
-        $this->name = $name;
-        $this->in = $in;
-        $this->description = $description;
-        $this->allowEmptyValue = $allowEmptyValue;
-        $this->required = $required;
-        $this->default = $default;
-    }
+        protected string $name,
+        protected string $in,
+        protected string $description,
+        protected bool $allowEmptyValue,
+        protected bool $required,
+        protected $default
+    ) {}
 
     public function getName(): string
     {

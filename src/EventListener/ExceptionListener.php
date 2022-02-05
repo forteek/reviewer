@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter
 class ExceptionListener
 {
     public function __construct(
-        private CamelCaseToSnakeCaseNameConverter $converter
+        protected CamelCaseToSnakeCaseNameConverter $converter
     ) {}
 
     public function onKernelException(ExceptionEvent $event): void
